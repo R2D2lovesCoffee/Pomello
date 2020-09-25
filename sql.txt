@@ -1,0 +1,13 @@
+CREATE TABLE `score` (
+  `user_id` int(10) unsigned NOT NULL,
+  `event_id` int(10) unsigned NOT NULL,
+  `score` int(10) unsigned NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `user_id_idx` (`user_id`),
+  KEY `score_idx` (`score`),
+  KEY `timestamp_idx` (`timestamp`)
+);
+
+SELECT user_id, score
+FROM score a
+WHERE `timestamp` = (SELECT MAX(`timestamp`) FROM score b WHERE a.user_id = b.user_id);
